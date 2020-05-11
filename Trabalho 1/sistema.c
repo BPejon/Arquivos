@@ -30,12 +30,14 @@ void flush_in(){
 int main(int argc, char **argv){
 	int opcao;
 	char entrada[30];
-	char nome_bin[30];
 	//Lê entrada de dados
-	scanf("%d %s %s", &opcao, entrada, nome_bin );
+	scanf("%d %s", &opcao, entrada);
 
 	//opcao 1
 	if(opcao == 1){
+		//nome do arquivo binario
+		char nome_bin[30];
+		scanf(" %s", nome_bin);
 
 		//abre o arquivo binário para ser gerado
 		FILE *arquivo;
@@ -76,7 +78,6 @@ int main(int argc, char **argv){
 	//opção2
 	if(opcao == 2){
 		FILE *arq;
-
 		//se houver falha de carregamento do arquivo
 		if( (arq = fopen(entrada,"rb")  )== NULL){
 			printf("Falha no processamento do arquivo.\n");
@@ -90,14 +91,14 @@ int main(int argc, char **argv){
 			exit(0);
 		}
 
-		status_invalido(arq);
+		//Nao precisa alterar o status na leitura, apenas quando há alteração nos dados de dados
 
 		//Le os primeiros 128 bytes do cabeçalho 
 		le_cabecalho(arq);
 		//Le todos os dados do arquivo binario
 		le_todos_registros(arq);
 
-		status_valido(arq);
+	
 		fclose(arq);
 	}
 

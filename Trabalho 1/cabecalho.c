@@ -46,6 +46,7 @@ void inicializa_status(FILE *arq){
 //le o cabeçalho
 void le_cabecalho(FILE *arq){
 	CABECALHO cab;
+	rewind(arq);
 	fread(&cab.status, sizeof(char), 1, arq);
 	fread(&cab.RRNproxRegistro, sizeof(int), 1, arq);
 	fread(&cab.numeroRegistrosInseridos, sizeof(int), 1, arq);
